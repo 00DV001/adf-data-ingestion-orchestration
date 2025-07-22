@@ -1,0 +1,17 @@
+{
+    "name": "ProductDataTable",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "LS_SQL_Source",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "AzureSqlTable",
+        "schema": [],
+        "typeProperties": {
+            "schema": "dbo",
+            "table": "Product"
+        }
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

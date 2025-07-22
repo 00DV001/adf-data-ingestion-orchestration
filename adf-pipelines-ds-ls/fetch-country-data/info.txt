@@ -1,0 +1,6 @@
+selected resource name:		pipeline_fetch_country_data
+selected resource type:		pipeline
+factory name:			devansh-csi2025
+factory location:		centralindia
+subscription id:		d2acefef-fd0c-430d-ae81-ca2291535b9a
+time of download (UTC):		Tue, 22 Jul 2025 19:56:02 GMT

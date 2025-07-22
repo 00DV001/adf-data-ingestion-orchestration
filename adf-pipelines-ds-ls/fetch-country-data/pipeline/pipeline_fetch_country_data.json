@@ -1,0 +1,106 @@
+{
+    "name": "pipeline_fetch_country_data",
+    "properties": {
+        "activities": [
+            {
+                "name": "FetchCountryData",
+                "type": "ForEach",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "items": {
+                        "value": "@createArray('india', 'us', 'uk', 'china', 'russia')\n",
+                        "type": "Expression"
+                    },
+                    "activities": [
+                        {
+                            "name": "WebActivity",
+                            "type": "WebActivity",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "0.12:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "method": "GET",
+                                "url": {
+                                    "value": "@concat('https://restcountries.com/v3.1/name/india')",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        {
+                            "name": "SaveCountryDataToADLS",
+                            "type": "Copy",
+                            "dependsOn": [
+                                {
+                                    "activity": "WebActivity",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "policy": {
+                                "timeout": "0.12:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "RestSource",
+                                    "httpRequestTimeout": "00:01:40",
+                                    "requestInterval": "00.00:00:00.010",
+                                    "requestMethod": "GET",
+                                    "paginationRules": {
+                                        "supportRFC5988": "true"
+                                    }
+                                },
+                                "sink": {
+                                    "type": "JsonSink",
+                                    "storeSettings": {
+                                        "type": "AzureBlobFSWriteSettings"
+                                    },
+                                    "formatSettings": {
+                                        "type": "JsonWriteSettings"
+                                    }
+                                },
+                                "enableStaging": false
+                            },
+                            "inputs": [
+                                {
+                                    "referenceName": "country_data",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "countryName": {
+                                            "value": "@item()",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                }
+                            ],
+                            "outputs": [
+                                {
+                                    "referenceName": "ds_adls_country_json",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "fileName": "@item()"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ],
+        "annotations": [],
+        "lastPublishTime": "2025-07-18T07:19:44Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

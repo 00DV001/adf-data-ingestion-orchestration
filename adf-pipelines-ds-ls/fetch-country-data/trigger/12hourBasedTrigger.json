@@ -1,0 +1,24 @@
+{
+    "name": "12hourBasedTrigger",
+    "properties": {
+        "annotations": [],
+        "runtimeState": "Started",
+        "pipelines": [
+            {
+                "pipelineReference": {
+                    "referenceName": "pipeline_fetch_country_data",
+                    "type": "PipelineReference"
+                }
+            }
+        ],
+        "type": "ScheduleTrigger",
+        "typeProperties": {
+            "recurrence": {
+                "frequency": "Hour",
+                "interval": 12,
+                "startTime": "2025-07-22T12:00:00",
+                "timeZone": "India Standard Time"
+            }
+        }
+    }
+}
