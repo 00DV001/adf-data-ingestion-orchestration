@@ -4,6 +4,10 @@
 
 This project showcases a complete data engineering workflow using Azure Data Factory (ADF), including automated data ingestion from REST APIs, conditional data transfer from SQL databases to Azure Data Lake Storage (ADLS), and orchestration of pipeline dependencies through scheduled triggers.
 
+## Problem Statement
+
+![problem-statement](/screenshots-project/problem-statement.png)
+
 ## Objectives
 
 1. **Fetch Country Data via REST API**
@@ -20,7 +24,6 @@ This project showcases a complete data engineering workflow using Azure Data Fac
 4. **Parameter Passing Between Pipelines**
    - Dynamically pass the customer record count from the parent pipeline to the child pipeline using pipeline parameters.
 
-![problem-statement](/screenshots-project/problem-statement.png)
 
 ## Architecture Components
 
