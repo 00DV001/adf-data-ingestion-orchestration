@@ -20,6 +20,8 @@ This project showcases a complete data engineering workflow using Azure Data Fac
 4. **Parameter Passing Between Pipelines**
    - Dynamically pass the customer record count from the parent pipeline to the child pipeline using pipeline parameters.
 
+![problem-statement](/screenshots-project/problem-statement.png)
+
 ## Architecture Components
 
 - **Azure Data Factory**: Manages and coordinates data pipelines.
@@ -28,7 +30,6 @@ This project showcases a complete data engineering workflow using Azure Data Fac
 - **REST API Integration**: Supplies country metadata.
 - **Pipeline Parameters**: Enable data exchange between pipelines.
 - **Schedule Trigger**: Executes pipelines automatically at defined intervals.
-
 
 ## Pipeline Details
 
@@ -39,11 +40,35 @@ This project showcases a complete data engineering workflow using Azure Data Fac
 - **Output**: JSON files saved in ADLS with country names as file names.
 - **Error Handling**: Includes retry logic for robustness.
 
+#### Screenshots - Task 1
+
+![1.1](/screenshots-project/fetch-country-data%20(1).png)
+![1.2](/screenshots-project/fetch-country-data%20(2).png)
+![1.3](/screenshots-project/fetch-country-data%20(3).png)
+![1.4](/screenshots-project/fetch-country-data%20(4).png)
+![1.5](/screenshots-project/fetch-country-data%20(5).png)
+![1.6](/screenshots-project/fetch-country-data%20(6).png)
+![1.7](/screenshots-project/fetch-country-data%20(7).png)
+![1.8](/screenshots-project/fetch-country-data%20(8).png)
+![1.9](/screenshots-project/fetch-country-data%20(9).png)
+![1.10](/screenshots-project/fetch-country-data%20(10).png)
+![1.11](/screenshots-project/fetch-country-data%20(11).png)
+![1.12](/screenshots-project/fetch-country-data%20(12).png)
+![1.13](/screenshots-project/fetch-country-data%20(13).png)
+![1.14](/screenshots-project/task1-fetch-country-data-activity.png)
+![1.15](/screenshots-project/fetch-country-data-output.png)
+
 ### 2. Scheduled Trigger
 
 - **Frequency**: Twice daily
 - **Timings**: 12:00 AM IST and 12:00 PM IST
 - **Configuration**: Uses CRON expressions for scheduling.
+
+#### Screenshots - Task 2
+
+![2.1](/screenshots-project/trigger-time-set%20(1).png)
+![2.2](/screenshots-project/trigger-time-set%20(2).png)
+![2.3](/screenshots-project/task2-12AMPM-activity.png)
 
 ### 3. Customer Data Pipeline (Parent)
 
@@ -52,11 +77,30 @@ This project showcases a complete data engineering workflow using Azure Data Fac
 - **Child Pipeline Trigger**: Invokes the product data pipeline if the customer count exceeds 600.
 - **Parameter Passing**: Customer count is passed to the child pipeline.
 
+#### Screenshots - Task 3
+
+- Source
+![3.1](/screenshots-project/custdatatable.png)
+![3.2](/screenshots-project/productdatatable.png)
+
+- Sink
+![3.3](/screenshots-project/adls_custdata.png)
+![3.4](/screenshots-project/adls_productdata.png)
+
+- Pipeline Overview
+![3.5](/screenshots-project/pipelinetask3.png)
+![3.6](/screenshots-project/task3-4parentchildpipeline-activity.png)
+
 ### 4. Product Data Pipeline (Child)
 
 - **Condition Check**: Executes only if the customer count parameter exceeds 600.
 - **Data Copy**: Copies product table data to ADLS.
 - **Parameter Validation**: Uses If Condition activity for validation.
+
+#### Screenshots - Task 4
+
+![4.1](/screenshots-project/pipelinetask4.png)
+![4.2](/screenshots-project/task3-4parentchildpipeline-activity.png)
 
 ## Sample Data Generation
 
