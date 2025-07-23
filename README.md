@@ -40,6 +40,27 @@ This project showcases a complete data engineering workflow using Azure Data Fac
 - **Output**: JSON files saved in ADLS with country names as file names.
 - **Error Handling**: Includes retry logic for robustness.
 
+#### Steps to follow
+
+1. **Open Azure Data Factory (ADF):**
+   Navigate to the Azure portal and open your ADF instance.
+
+2. **Create a New Pipeline:**
+   Click on "Author" to create a new pipeline.
+
+3. **Add a Web Activity:**
+   Drag and drop a "Web" activity onto the pipeline canvas.
+   Configure it to call the REST API endpoint `https://restcountries.com/v3.1/name/{name}` for each country (India, US, UK, China, Russia).
+
+4. **Loop Through Countries:**
+   Use a "ForEach" activity to loop through the list of countries.
+   Pass the country name dynamically to the Web activity.
+
+5. **Save Data to ADLS:**
+   Add a "Copy Data" activity inside the ForEach loop.
+   Configure the sink to save the JSON response to Azure Data Lake Storage (ADLS), using the country name as the file name.
+
+
 #### Screenshots - Task 1
 
 ![1.1](/screenshots-project/fetch-country-data%20(1).png)
@@ -64,6 +85,20 @@ This project showcases a complete data engineering workflow using Azure Data Fac
 - **Timings**: 12:00 AM IST and 12:00 PM IST
 - **Configuration**: Uses CRON expressions for scheduling.
 
+#### Steps to follow
+
+1. **Create a New Trigger:**
+   Go to the "Manage" tab and select "Triggers."
+   Click on "+ New" to create a new trigger.
+
+2. **Configure the Trigger:**
+   Set the trigger type to "Schedule."
+   Configure it to run twice daily at 12:00 AM and 12:00 PM IST.
+
+3. **Associate the Trigger with the Pipeline:**
+   Choose the pipeline created in Step 1 and link it to this schedule.
+
+
 #### Screenshots - Task 2
 
 ![2.1](/screenshots-project/trigger-time-set%20(1).png)
@@ -76,6 +111,28 @@ This project showcases a complete data engineering workflow using Azure Data Fac
 - **Condition Check**: If the count exceeds 500, data is copied to ADLS.
 - **Child Pipeline Trigger**: Invokes the product data pipeline if the customer count exceeds 600.
 - **Parameter Passing**: Customer count is passed to the child pipeline.
+
+#### Steps to follow
+
+1. **Create a New Pipeline:**
+   Click on "Author" to create a new pipeline for copying customer data.
+
+2. **Add a Lookup Activity:**
+   Drag a "Lookup" activity onto the canvas.
+   Configure it to fetch the record count from the customer table in the database.
+
+3. **Add an If Condition Activity:**
+   Drag an "If Condition" activity onto the canvas.
+   Set the condition to check if the record count is greater than 500.
+
+4. **Add a Copy Data Activity:**
+   Inside the "If Condition" activity, add a "Copy Data" activity.
+   Configure the source as the customer table and the sink as ADLS.
+
+5. **Add an Execute Pipeline Activity:**
+   Inside the "If Condition" activity, add an "Execute Pipeline" activity.
+   Set it to trigger the child pipeline and pass the customer record count as a parameter, greater than 600.
+
 
 #### Screenshots - Task 3
 
@@ -96,6 +153,23 @@ This project showcases a complete data engineering workflow using Azure Data Fac
 - **Condition Check**: Executes only if the customer count parameter exceeds 600.
 - **Data Copy**: Copies product table data to ADLS.
 - **Parameter Validation**: Uses If Condition activity for validation.
+
+#### Steps to follow
+
+1. **Create a New Pipeline:**
+   Click on "Author" to create a new pipeline for copying product data, which will act as child pipeline.
+
+2. **Add a Parameter:**
+   Define a parameter in this child pipeline to receive the customer record count from the parent pipeline.
+
+3. **Add an If Condition Activity:**
+   Drag and drop an "If Condition" activity onto the canvas.
+   Set the condition to check if the customer record count parameter is greater than 600.
+
+4. **Add a Copy Data Activity:**
+   Inside the "If Condition" activity, add a "Copy Data" activity.
+   Set the source as the product table and the sink as ADLS.
+
 
 #### Screenshots - Task 4
 
