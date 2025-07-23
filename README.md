@@ -230,4 +230,5 @@ This project showcases a complete data engineering workflow using Azure Data Fac
 ## Author
 
 **Devansh Vats**
-Data Engineering
+CT_CSI_DE_6110
+Data Engineering Intern
