@@ -79,15 +79,15 @@ This project showcases a complete data engineering workflow using Azure Data Fac
 
 #### Screenshots - Task 3
 
-- Source
+- Source <br />
 ![3.1](/screenshots-project/custdatatable.png)
 ![3.2](/screenshots-project/productdatatable.png)
 
-- Sink
+- Sink <br />
 ![3.3](/screenshots-project/adls_custdata.png)
 ![3.4](/screenshots-project/adls_productdata.png)
 
-- Pipeline Overview
+- Pipeline Overview <br />
 ![3.5](/screenshots-project/pipelinetask3.png)
 ![3.6](/screenshots-project/task3-4parentchildpipeline-activity.png)
 
